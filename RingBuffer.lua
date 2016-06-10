@@ -17,23 +17,22 @@ function RingBuffer.new(len_a)
 	return self
 end
 
-
+--Clear ring buffer. Head and tail revert to base index. State and Flag are reset.
 function RingBuffer.Clear(self)
 	self.state='A'
 	self.sentence_flag=false
 	self.head=1
 	self.tail=1
 end
-
+--Push character into ring buffer
 function RingBuffer.Push(self,character)
 	self.buffer[self.head]=character
 	self.head=(self.head+1)%(self.size+1)
 	if(self.head==0) then
 		self.head=1
 	end
-
 end
-
+--Pop character from ring buffer
 function RingBuffer.Pop(self)
 	local temp_a
 	temp_a=self.buffer[self.tail]
